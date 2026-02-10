@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday Gauri</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&family=Playfair+Display:wght@500&family=Pacifico&family=Montserrat:wght@300&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+    height:100vh;
+    background:
+      radial-gradient(circle at top, rgba(255,140,200,.15), transparent 40%),
+      radial-gradient(circle at bottom, rgba(140,120,255,.15), transparent 40%),
+      radial-gradient(circle at center, #1b0033, #05000f);
+    color:#eee;
+    overflow:hidden;
+    font-family:Poppins,sans-serif;
+}
+
+/* vignette */
+body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+    box-shadow:inset 0 0 120px rgba(0,0,0,.65);
+    pointer-events:none;
+}
+
+/* sections */
+.section{
+    position:absolute;
+    inset:0;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:20px;
+}
+.section.active{
+    display:flex;
+    animation:fade .9s ease;
+}
+@keyframes fade{
+    from{opacity:0;transform:scale(.96);}
+    to{opacity:1;transform:scale(1);}
+}
+
+/* card */
+.card{
+    background:rgba(255,255,255,.06);
+    border-radius:26px;
+    padding:42px;
+    max-width:760px;
+    backdrop-filter:blur(16px);
+    box-shadow:
+      0 0 45px rgba(255,0,150,.18),
+      inset 0 0 30px rgba(255,255,255,.03);
+}
+
+/* text */
+.intro-title{
+    font-family:Pacifico;
+    font-size:2.8rem;
+    color:#ff6bd5;
+}
+.intro-text{
+    font-family:Montserrat;
+    margin-top:15px;
+    color:#ddd;
+}
+.presence{
+    font-family:'Playfair Display',serif;
+    font-size:1.15rem;
+    line-height:1.9;
+}
+.nickname{
+    font-family:Pacifico;
+    font-size:1.8rem;
+    color:#caa6ff;
+    margin-top:12px;
+}
+.final-title{
+    font-family:Pacifico;
+    font-size:3rem;
+    color:#ff7adf;
+}
+.final-text{
+    margin-top:18px;
+}
+
+/* button */
+.next{
+    margin-top:32px;
+    padding:10px 34px;
+    border:none;
+    border-radius:40px;
+    background:linear-gradient(90deg,#ff4fd8,#8f5bff);
+    color:white;
+    cursor:pointer;
+    box-shadow:0 8px 22px rgba(255,95,207,.4);
+    transition:.35s ease;
+}
+.next:hover{
+    transform:translateY(-2px) scale(1.03);
+}
+
+/* photo */
+.photo-wrap{
+    margin:25px auto;
+    width:170px;
+    height:170px;
+    border-radius:50%;
+    padding:4px;
+    background:linear-gradient(135deg,#ff4fd8,#8f5bff);
+    box-shadow:0 0 30px rgba(255,95,207,.8);
+    animation:breath 6s ease-in-out infinite;
+}
+@keyframes breath{
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.04);}
+}
+.photo-wrap img{
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    object-fit:cover;
+    filter:blur(10px);
+    transform:scale(1.1);
+    transition:2.2s ease;
+}
+.section.active .photo-wrap img{
+    filter:blur(0);
+    transform:scale(1);
+}
+
+/* heartbeat */
+.heartbeat{
+    animation:heartbeat 1.6s ease-in-out infinite;
+}
+@keyframes heartbeat{
+    0%{text-shadow:0 0 18px #ff6bd5; transform:scale(1);}
+    25%{text-shadow:0 0 32px #ff9ae6; transform:scale(1.02);}
+    40%{text-shadow:0 0 20px #ff6bd5; transform:scale(1);}
+    100%{text-shadow:0 0 18px #ff6bd5; transform:scale(1);}
+}
+
+/* particles */
+.particle{
+    position:fixed;
+    width:6px;
+    height:6px;
+    background:rgba(255,255,255,.55);
+    border-radius:50%;
+    animation:float linear infinite;
+}
+@keyframes float{
+    from{transform:translateY(110vh);opacity:0;}
+    to{transform:translateY(-10vh);opacity:1;}
+}
+
+/* confetti */
+.confetti{
+    position:fixed;
+    top:-10px;
+    font-size:18px;
+    opacity:.9;
+    animation:fall linear infinite;
+}
+@keyframes fall{
+    to{transform:translateY(110vh) rotate(360deg);}
+}
+
+/* ripple */
+.ripple{
+    position:fixed;
+    width:20px;
+    height:20px;
+    border-radius:50%;
+    background:rgba(255,255,255,.35);
+    transform:translate(-50%,-50%);
+    animation:ripple .9s ease-out forwards;
+    pointer-events:none;
+}
+@keyframes ripple{
+    to{width:180px;height:180px;opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<audio id="bgm" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- SECTION 1 -->
+<div class="section active">
+  <div class="card" onclick="startTyping()">
+    <div class="intro-title">Oye ICSE 👀</div>
+    <div id="introText" class="intro-text"></div>
+    <div style="margin-top:10px;color:#aaa;">tap here 👆</div>
+    <button id="introBtn" class="next" style="display:none;" onclick="next()">Next →</button>
+  </div>
+</div>
+
+<!-- SECTION 2 -->
+<div class="section">
+  <div class="card">
+    <div class="photo-wrap">
+      <img src="gauri.jpg" alt="Gauri">
+    </div>
+    <div class="presence">
+      Some people has pretty eye, beutifull
+      slime and many more. Just like You!!.<br><br>
+
+      You are most Beautifull Gurl!! I ever seen.  
+      I want to say you MOON, but it has spot.
+      I want to say you FLOWER, but it get blow down.
+      Even I can't define your beauty!!
+      You are Soooo!! much Cuteiiii.<br><br>
+    </div>
+    <button class="next" onclick="next()">Next →</button>
+  </div>
+</div>
+
+<!-- SECTION 3 -->
+<div class="section">
+  <div class="card">
+    <div class="presence">
+      12 February — sirf ek date nahi.<br>
+      Ye woh din hai jab ek <b>Chasmish</b> aayi thi.
+    </div>
+    <div class="nickname">Dear Gauriiii ✨</div>
+    <button class="next" onclick="next()">Next →</button>
+  </div>
+</div>
+
+<!-- FINAL -->
+<div class="section">
+  <div class="card">
+    <div class="final-text">
+      Wishing you the <b>happiest birthday</b> 💖
+    </div>
+    <div class="final-title heartbeat" style="margin-top:22px;">
+      Happpiiiieee Birthday Cuteii Piee 🎉
+    </div>
+    <div class="final-text">
+      I hope this year gives you moments  
+      that feel warm, easy, and quietly special.
+    </div>
+  </div>
+</div>
+
+<script>
+let idx=0,i=0,started=false,locked=false;
+const sections=document.querySelectorAll('.section');
+const music=document.getElementById('bgm');
+const intro="sun na… ek chhoti si cheez hai tumhare liye ✨";
+
+/* music fade in */
+function fadeInMusic(){
+ let v=0;
+ music.volume=0;
+ music.play().catch(()=>{});
+ const t=setInterval(()=>{
+  v+=0.05;
+  music.volume=Math.min(v,1);
+  if(v>=1) clearInterval(t);
+ },150);
+}
+
+/* smooth auto-typing */
+function startTyping(){
+ if(started) return;
+ started=true;
+ const interval=setInterval(()=>{
+  if(i<intro.length){
+   document.getElementById("introText").innerHTML+=intro.charAt(i++);
+  }
+  if(i===intro.length){
+   document.getElementById("introBtn").style.display="inline-block";
+   clearInterval(interval);
+  }
+ },70);
+}
+
+function next(){
+ if(locked) return;
+ locked=true;
+
+ if(idx===0) fadeInMusic();
+ sections[idx].classList.remove('active');
+ idx++;
+
+ if(idx<sections.length){
+  sections[idx].classList.add('active');
+  if(idx===sections.length-1) confetti();
+ }
+
+ setTimeout(()=>locked=false,600);
+}
+
+/* particles */
+function particle(){
+ const p=document.createElement('div');
+ p.className='particle';
+ p.style.left=Math.random()*100+'vw';
+ p.style.animationDuration=(7+Math.random()*7)+'s';
+ document.body.appendChild(p);
+ setTimeout(()=>p.remove(),14000);
+}
+setInterval(particle,600);
+
+/* confetti */
+function confetti(){
+ for(let i=0;i<120;i++){
+  const c=document.createElement('div');
+  c.className='confetti';
+  c.innerText=['✨','💖','🎉'][Math.floor(Math.random()*3)];
+  c.style.left=Math.random()*100+'vw';
+  c.style.animationDuration=(3+Math.random()*3)+'s';
+  document.body.appendChild(c);
+  setTimeout(()=>c.remove(),6000);
+ }
+}
+
+/* tap ripple */
+document.addEventListener('click',e=>{
+ const r=document.createElement('div');
+ r.className='ripple';
+ r.style.left=e.clientX+'px';
+ r.style.top=e.clientY+'px';
+ document.body.appendChild(r);
+ setTimeout(()=>r.remove(),900);
+});
+</script>
+
+</body>
+</html>
